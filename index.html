@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triangle Media Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #080A0E;
+  color: #EEF2F7;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.glow {
+  position: fixed; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,210,255,0.05) 0%, transparent 70%);
+  pointer-events: none; top: -100px; right: -100px;
+}
+.logo { text-align: center; margin-bottom: 48px; }
+.mark {
+  width: 60px; height: 60px; border-radius: 14px;
+  background: #00D2FF; display: inline-flex;
+  align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.2rem; color: #080A0E;
+  margin-bottom: 16px;
+  box-shadow: 0 0 30px rgba(0,210,255,0.35);
+}
+.name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  display: block;
+}
+.sub { font-size: 0.8rem; color: #5A6478; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; display: block; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 680px; width: 100%; }
+.card {
+  background: #131720; border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 36px 24px; text-align: center;
+  cursor: pointer; transition: all 0.25s;
+}
+.card:hover {
+  border-color: rgba(0,210,255,0.4); transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,210,255,0.08);
+}
+.ci { font-size: 3rem; margin-bottom: 14px; }
+.ct {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #00D2FF; margin-bottom: 8px;
+}
+.cd { font-size: 0.82rem; color: #5A6478; line-height: 1.5; margin-bottom: 20px; }
+.cb {
+  display: inline-block; padding: 9px 22px;
+  background: #00D2FF; color: #080A0E; border-radius: 7px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+}
+.card.church .cb { background: #1B3A5C; color: white; }
+.footer { margin-top: 36px; font-size: 0.73rem; color: #2A2F3A; }
+.frame { display:none; position:fixed; inset:0; z-index:100; border:none; width:100%; height:100%; }
+.back-btn {
+  display:none; position:fixed; bottom:20px; right:20px; z-index:200;
+  padding: 10px 18px; background: #00D2FF; color: #080A0E;
+  border: none; border-radius: 8px; cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0,210,255,0.4);
+}
+@media(max-width:500px){ .cards{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+
+<div class="logo">
+  <div class="mark">TMS</div>
+  <span class="name">Triangle Media Solutions</span>
+  <span class="sub">LED Wall Rental Portal</span>
+</div>
+
+<div class="cards">
+  <div class="card" onclick="openPortal('admin')">
+    <div class="ci">⚙️</div>
+    <div class="ct">Admin Portal</div>
+    <div class="cd">Manage rentals, LED wall inventory, billing, and all church accounts.</div>
+    <span class="cb">Enter Admin →</span>
+  </div>
+  <div class="card church" onclick="openPortal('client')">
+    <div class="ci">⛪</div>
+    <div class="ct">Church Portal</div>
+    <div class="cd">View your LED wall, make payments, and access your documents.</div>
+    <span class="cb">Enter Portal →</span>
+  </div>
+</div>
+
+<div class="footer">© 2025 Triangle Media Solutions · All rights reserved</div>
+
+<iframe id="adminFrame" class="frame" src="admin.html"></iframe>
+<iframe id="clientFrame" class="frame" src="index-client.html"></iframe>
+<button class="back-btn" id="backBtn" onclick="goBack()">← Back to Home</button>
+
+<script>
+function openPortal(type) {
+  document.querySelector('.glow').style.display='none';
+  document.querySelector('.logo').style.display='none';
+  document.querySelector('.cards').style.display='none';
+  document.querySelector('.footer').style.display='none';
+  document.getElementById('backBtn').style.display='block';
+  if(type==='admin') document.getElementById('adminFrame').style.display='block';
+  else document.getElementById('clientFrame').style.display='block';
+}
+function goBack() {
+  document.querySelector('.glow').style.display='block';
+  document.querySelector('.logo').style.display='block';
+  document.querySelector('.cards').style.display='grid';
+  document.querySelector('.footer').style.display='block';
+  document.getElementById('backBtn').style.display='none';
+  document.getElementById('adminFrame').style.display='none';
+  document.getElementById('clientFrame').style.display='none';
+}
+</script>
+</body>
+</html>
